@@ -34,9 +34,9 @@
     \\[1ex]\rotatebox{180}{\fbox{*}}}}
 \fi
 
-\newcommand{\class}{\raisebox{-0.7ex}{\includegraphics[scale=0.3]{logo}}技术委员会培训}
+\newcommand{\class}{\raisebox{-0.7ex}{\includegraphics[scale=0.3]{logo}}\,技术委员会培训}
 \newcommand{\term}{2023年度}
-\newcommand{\examnum}{测试培训练习}
+\newcommand{\examnum}{UCloud测试实战练习}
 \newcommand{\examdate}{\today}
 \newcommand{\timelimit}{60分钟}
 
@@ -50,6 +50,16 @@
 \newcommand\importJavaPlain[1]{\inputminted[breaklines,fontsize=\normalsize]{java}{#1}}
 \newcommand\importSQLPlain[1]{\inputminted[breaklines,fontsize=\normalsize]{sql}{#1}}
 \newcommand\importPython[1]{\inputminted[breaklines,frame=leftline,framerule=1.1pt,framesep=1em,linenos,fontsize=\normalsize]{python}{#1}}
+
+\newminted{bash}{
+  autogobble,
+  breaklines,
+  frame=lines,
+  framerule=0.8pt,
+  framesep=1em,
+  linenos,
+  fontsize=\footnotesize
+}
 
 \pagestyle{head}
 \firstpageheader{}{}{}
@@ -68,7 +78,7 @@
 \textbf{\term} &&\\
 \textbf{\examnum} &&\\
 \textbf{\examdate} &&\\
-\textbf{考试时长: \timelimit} &\textbf{得分:}&\makebox[2in]{\hrulefill}
+\textbf{时长: \timelimit} &\textbf{得分:}&\makebox[2in]{\hrulefill}
 \end{tabular*}\\
 \rule[2ex]{\textwidth}{2pt}
 
@@ -76,8 +86,7 @@
 % \newcounter{passingscore}
 % \setcounter{passingscore}{80}
 \noindent
-本测验共有\numquestions 道题目，总分为\numpoints ，分为\numpages 页。
-本测验必须\textbf{\emph{务必独立}}完成。
+本练习共有\numquestions 道题目，总分为\numpoints ，分为\numpages 页。
 
 \begin{center}
   \textbf{评分表}\\
@@ -86,7 +95,7 @@
     题目 & 01 & 02 & 03 & 04 & 05 & 06 & 07 & 08 & 09 & 10 \\
     \hline
     分数  & \pointsofquestion{1} & \pointsofquestion{2}
-          &                      &                     
+          & \pointsofquestion{3} &                     
           &                      &                     
           &                      &                     
           &                      &                         \\
@@ -128,7 +137,7 @@
   \CorrectChoiceEmphasis{\color{red}\itshape}
 
 \newpage
-\question[20] 斐波那契数列由公式\ref{eq:fibonacci}给出。
+\question[40] 斐波那契数列由公式\ref{eq:fibonacci}给出。
 \begin{equation}
     \label{eq:fibonacci}
     f(n)=\left\{
@@ -139,16 +148,185 @@
         \end{array}
     \right.
 \end{equation}
-请用尾递归(Tail Recursion)编写斐波那契数列计算程序，并用Benchmark模块对比普通递归和辗相加法的性能差异。
-\fillwithdottedlines{\stretch{2}}
-\ifprintanswers
-\newpage
-非递归Java程序实现如下：
-\importJava{code/fibonacci.java}
-验证的单元测试程序(JUnit 4)如下：
-\importJava{code/fibonacci-test.java}
-\fi
+\emph{testbootcamp}项目中实现了计算斐波那契数列的多种算法以及部分单元测试。
+以下是尾递归(Tail Recursion)编写斐波那契数列计算程序:
 
+请在\emph{testbootcamp}项目中补充该算法的单元测试，
+并用Benchmark模块对比该算法和普通递归和辗相加法的性能差异。
+
+\begin{parts}
+  \part{}准备工作
+
+本练习基于github项目\href{https://github.com/schnell18/testbootcamp}{https://github.com/schnell18/testbootcamp}。\\
+请确保你的电脑已经安装以下软件：
+
+\begin{itemize}
+    \item git
+    \item golang (1.20+)
+    \item 浏览器，推荐使用chrome
+    \item 开发工具goland，或Vim及VS Code
+\end{itemize}
+
+运行以下命令克隆该项目：
+\begin{itemize}
+    \item \verb=cd ~/work=
+    \item \verb=git clone https://github.com/schnell18/testbootcamp=
+    \item \verb=cd ~/work/testbootcamp/golang=
+\end{itemize}
+
+MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
+
+  \part{}运行单元测试
+  \begin{subparts}
+    \subpart{}切换到testbootcamp项目的\verb=golang/fib=目录下
+    \subpart{}执行\verb=go test=
+    \subpart{}观察输出
+    \fillwithdottedlines{\stretch{2}}
+    \subpart{}切换到testbootcamp项目的\verb=golang=目录下
+    \subpart{}执行\verb=go test ./...=
+    \subpart{}观察输出 \fillwithdottedlines{\stretch{2}}
+  \end{subparts}
+
+  \part{}运行Ginkgo单元测试
+  \begin{subparts}
+    \subpart{}切换到testbootcamp项目的\verb=golang/fib/bdd=目录下
+    \subpart{}执行\verb=go test .=
+    \subpart{}观察输出
+    \fillwithdottedlines{\stretch{2}}
+  \end{subparts}
+  \part{}运行基准测试
+  \begin{subparts}
+    \subpart{}切换到testbootcamp项目的\verb=golang/fib/bench=目录下
+    \subpart{}执行\verb#go test -bench=.#
+    \subpart{}观察输出
+    \fillwithdottedlines{\stretch{2}}
+  \end{subparts}
+  \part{}测试覆盖率
+  \begin{subparts}
+    \subpart{}切换到testbootcamp项目的\verb=golang/fib=目录下
+    \subpart{}执行\verb#go test –coverprofile=coverage.out#
+    \subpart{}执行\verb#go tool cover -html coverage.out#
+    \subpart{}观察在浏览器中的代码覆盖情况
+    \fillwithdottedlines{\stretch{2}}
+  \end{subparts}
+  \part{}使用golangci-lint扫描代码
+  \begin{subparts}
+    \subpart{}切换到testbootcamp项目的\verb=golang=目录下
+    \subpart{}执行\verb#golangci-lint run#
+    \subpart{}观察执行结果 \fillwithdottedlines{\stretch{2}}
+    \subpart{}请更正该问题后再次扫描
+  \end{subparts}
+\end{parts}
+
+\newpage
+\question[40] 
+自定义数据（UserData）是指主机初次启动或每次启动时，系统自动运行的配置脚本。
+用户可通过控制台或 API 传入元数据，并由主机内的 cloud-init 程序执行。
+判断主机是否支持用户自定义数据，需要确认镜像内部已安装了 cloud-init，
+当符合条件时，主机创建页面会展示“自定义数据”选项。
+请针对以下功能点，编写对应的测试用例：
+
+\begin{itemize}
+  \item 支持的脚本类型包括：User-Data、Cloud Config、Include、Gzip 压缩脚本等；
+  \item 脚本内容不能超过 16 KB；
+  \item 初次启动和每次开机 / 重装 / 重启时执行；
+  \item 自定义数据支持编辑修改；
+  \item 可在主机内部获取用户自定义数据 `curl http://100.80.80.80/user-data`
+\end{itemize}
+本次测试任务只需要考虑已经支持cloud-init的官方CentOS镜像，
+请按照本题所列步骤完成测试用例、测试评审、测试执行和测试报告。
+
+\begin{parts}
+  \part{}准备工作
+
+  请用邮箱在\href{https://www.overleaf.com}{https://www.overleaf.com} 注册一个overleaf帐号。
+  
+  \part{}登录Metersphere测试平台
+
+  请用公司帐号登录Metersphere测试平台。\\
+  该系统的地址是：\href{https://ut.ucloudadmin.com/metersphere}{https://ut.ucloudadmin.com/metersphere}
+  该系统集成了公司的统一登录系统CAS。
+  
+  \part{}进入新手训练营项目
+  \begin{subparts}
+    \subpart{}使用右上角工作空间下拉框切换到\emph{bootcamp}工作空间
+    \subpart{}点击顶部\emph{测试跟踪}标签页，使用左上角项目下拉框切换到\emph{FirstClass}项目
+  \end{subparts}
+
+  \part{}创建专属测试模块
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{功能用例}标签页
+    \subpart{}将鼠标停留在左侧导航栏的\emph{全部用例}节点片刻，并在出现加号后点击加号
+    \subpart{}输入\emph{新手训练-本人姓名}，添加一个专属测试模块
+  \end{subparts}
+
+  \part{}编写测试用例
+  \begin{subparts}
+    \subpart{}选中刚刚创建的模块，点击\emph{更多操作}下拉菜单后再点击点击\emph{新建用例}菜单
+    \subpart{}在\emph{新建用例}对话框中输入用例名称后点击\emph{编辑详情}按钮进入用例编辑界面
+    \subpart{}根据测试要求在\emph{步骤信息}中填写详尽的\emph{前置条件}和\emph{步骤描述}
+  \end{subparts}
+
+  \part{}创建测试用例评审
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{用例评审}标签页
+    \subpart{}点击\emph{创建用例评审}按钮，进入\emph{创建用例评审}对话框
+    \subpart{}填写\emph{评审名称}、\emph{评审人}和\emph{截止时间}后点击\emph{规划\&执行}按钮
+    \subpart{}在用例评审界面中点击\emph{关联用例}按钮，在\emph{关联用例}对话框选择相关用例
+  \end{subparts}
+
+  \part{}评审用例
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{用例评审}标签页
+    \subpart{}在\emph{评审}下拉框中选择上一步创建的用例评审
+    \subpart{}点击\emph{开始评审}按钮，进入评审界面
+    \subpart{}使用右侧评论区记录评审过程中的建议，并评审意见标记该用例是否评审通过
+    \subpart{}修改未评审通过的用例后再次评审直至通过
+  \end{subparts}
+
+  \part{}创建测试计划
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{测试计划}标签页
+    \subpart{}点击\emph{创建测试计划}按钮，进入\emph{创建测试计划}对话框
+    \subpart{}填写\emph{计划名称}、\emph{负责人}、\emph{测试阶段}、\emph{计划开始}、\emph{计划结束}后点击\emph{规划\&执行}按钮
+    \subpart{}在测试计划界面中点击第三排\emph{功能用例}标签页，点击\emph{关联测试用例}按钮
+    \subpart{}在\emph{关联测试用例}对话框选择相关用例
+  \end{subparts}
+
+  \part{}执行测试
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{测试计划}标签页
+    \subpart{}在\emph{计划}下拉框中选择上一步创建的测试计划
+    \subpart{}点击第三排\emph{功能测试用例}标签页，选择列表中的测试用例，进入测试执行详情页
+    \subpart{}检查前置条件中的要求是否已满足，否则进行相应的设置或准备工作
+    \subpart{}执行每个测试步骤，并记录实际结果和是否该步骤通过测试
+    \subpart{}如有缺陷，则提交缺陷并和测试用例关联
+    \subpart{}标记测试用例是否通过
+    \subpart{}完成该测试计划中的所有测试
+  \end{subparts}
+
+  \part{}生成测试报告
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{测试计划}标签页
+    \subpart{}在测试计划列表中找到上个步骤中操作过的测试计划，在操作栏点击发送报告(纸飞机图标)
+    \subpart{}编辑\emph{报告总结}，添加必要的描述后进行保存
+    \subpart{}点击右上角\emph{发送}按钮，在\emph{发送报告配置}对话框中按需设置抄送人员等设置后点击\emph{发送}按钮
+    \subpart{}查看邮件
+  \end{subparts}
+
+  \part{}生成测试报告PDF版本
+  \begin{subparts}
+    \subpart{}点击顶部第二排\emph{报告}标签页
+    \subpart{}在测试计划列表中找到上个步骤中操作过的测试计划，在操作栏点击查看测试报告(文档图标)
+    \subpart{}在\emph{原始报告}页的右上角点击\emph{LaTeX}下载按钮
+    \subpart{}等待浏览器下载完测试报告LaTeX源代码的zip文件
+    \subpart{}在overleaf中创建一个新项目，并上传上个步骤中下载的zip文件
+    \subpart{}上传完成后，overleaf会自动编译测试报告，如果右侧预览的PDF未能正确生成，请点击最右上角的\emph{Menu}，并在弹层的\emph{Settings}区域下的\emph{Compiler}下拉框中选择\emph{XeLaTeX}选项后重新编译
+    \subpart{}浏览测试报告内容，按需调整或添加你需要的内容并重新编译
+    \subpart{}下载PDF文件，将测试报告存档
+  \end{subparts}
+
+\end{parts}
 \newpage
 \question[20] 
 请用本次培训了解的知识和工具，设计一个适合你所负责产品的质量改进措施。

@@ -2,7 +2,8 @@ package fib
 
 func Fibonacci(n uint64) uint64 {
 	var i, x, y uint64 = 0, 0, 1
-	for i = 0; i < n; i++ {
+	// for i = 0; i < n; i++ {
+	for ; i < n; i++ {
 		x, y = y, x+y
 	}
 	return x

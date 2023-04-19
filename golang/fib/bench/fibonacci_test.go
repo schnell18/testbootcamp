@@ -1,6 +1,7 @@
 package fib
 
 import (
+	"github.com/schnell18/testbootcamp/golang/fib"
 	"testing"
 )
 
@@ -16,7 +17,7 @@ func BenchmarkFibonacci(b *testing.B) {
 	}
 	for j := 0; j < b.N; j++ {
 		for _, tc := range cases {
-			_ = Fibonacci(tc.arg)
+			_ = fib.Fibonacci(tc.arg)
 		}
 	}
 }
@@ -33,7 +34,7 @@ func BenchmarkFibonacci2(b *testing.B) {
 	}
 	for j := 0; j < b.N; j++ {
 		for _, tc := range cases {
-			_ = Fibonacci2(tc.arg)
+			_ = fib.Fibonacci2(tc.arg)
 		}
 	}
 }
