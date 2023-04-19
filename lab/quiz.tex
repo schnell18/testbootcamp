@@ -1,0 +1,161 @@
+%!TEX TS-program = xelatex
+%!TEX encoding= UTF-8 Unicode
+
+\documentclass[12pt,addpoints,fleqn]{exam}
+\usepackage{ctex}
+\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{listings,adjustbox}
+\usepackage{graphicx,marvosym}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{minted}
+\usepackage{booktabs,makecell,multirow,threeparttable,diagbox}
+\graphicspath{{./images/}}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\usepackage{color}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue,
+  bookmarksnumbered=true,
+  CJKbookmarks=true,
+  bookmarksopen=true]{hyperref}
+
+% setup water mark for solutions
+\ifprintanswers
+  \usepackage[draft,allpages]{draftmark}
+  \draftmarksetup{showcenter=false,fontfamily=ppl,angle=10,scale=.8,
+    color=red!10,coordunit=pc,xcoord=0,ycoord=0,
+    mark={\fbox{*}\\[1ex]答案涉密\\请勿传播
+    \\[1ex]\rotatebox{180}{\fbox{*}}}}
+\fi
+
+\newcommand{\class}{\raisebox{-0.7ex}{\includegraphics[scale=0.3]{logo}}技术委员会培训}
+\newcommand{\term}{2023年度}
+\newcommand{\examnum}{测试培训练习}
+\newcommand{\examdate}{\today}
+\newcommand{\timelimit}{60分钟}
+
+
+% reduce choice indent
+\renewcommand{\choiceshook}{%
+    \setlength{\leftmargin}{2em}%
+}
+
+\newcommand\importJava[1]{\inputminted[breaklines,frame=leftline,framerule=1.1pt,framesep=1em,linenos,fontsize=\normalsize]{java}{#1}}
+\newcommand\importJavaPlain[1]{\inputminted[breaklines,fontsize=\normalsize]{java}{#1}}
+\newcommand\importSQLPlain[1]{\inputminted[breaklines,fontsize=\normalsize]{sql}{#1}}
+\newcommand\importPython[1]{\inputminted[breaklines,frame=leftline,framerule=1.1pt,framesep=1em,linenos,fontsize=\normalsize]{python}{#1}}
+
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class\ - \examnum}{}{第\thepage 页，共\numpages 页}
+\runningheadrule
+
+\SolutionEmphasis{\itshape\small\color{red}}
+\renewcommand{\questionlabel}{\textbf{第\hspace{-0.04ex}\thequestion\hspace{-0.02ex}题}}
+\renewcommand{\solutiontitle}{\noindent\textbf{参考答案:}\par\noindent}
+
+\begin{document}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} &\textbf{姓名:} & \makebox[2in]{\hrulefill}\\
+\textbf{\term} &&\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\textbf{考试时长: \timelimit} &\textbf{得分:}&\makebox[2in]{\hrulefill}
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+
+% TODO: use math expression to replace 80
+% \newcounter{passingscore}
+% \setcounter{passingscore}{80}
+\noindent
+本测验共有\numquestions 道题目，总分为\numpoints ，分为\numpages 页。
+本测验必须\textbf{\emph{务必独立}}完成。
+
+\begin{center}
+  \textbf{评分表}\\
+  \begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}}|l*{10}{|c}|}
+    \hline
+    题目 & 01 & 02 & 03 & 04 & 05 & 06 & 07 & 08 & 09 & 10 \\
+    \hline
+    分数  & \pointsofquestion{1} & \pointsofquestion{2}
+          &                      &                     
+          &                      &                     
+          &                      &                     
+          &                      &                         \\
+    \hline
+    得分   &    &    &    &    &    &    &    &    &    &    \\
+    \hline
+    题目 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\
+    \hline
+    分数  &                       &                      
+          &                       &                      
+          &                       &                      
+          &                       &                      
+          &                       &                         \\
+    \hline
+    得分   &    &    &    &    &    &    &    &    &    &    \\
+    \hline
+    题目 & 21 & 22 & 23 & 24 & 25 & 26 &    &    &    &    \\
+    \hline
+    分数  &                       &                      
+          &                       &                      
+          &                       &                      
+          &                       &
+          &                       &                         \\
+    \hline
+    得分   &    &    &    &    &    &    &    &    &    &    \\
+    \hline
+  \end{tabular*}
+\end{center}
+
+\noindent
+\rule[2ex]{\textwidth}{2pt}
+
+\newpage
+
+\begin{questions}
+  \pointsinrightmargin
+  \marginpointname{\hspace{-0.02ex}分}
+  \setlength{\rightpointsmargin}{2cm}
+  \CorrectChoiceEmphasis{\color{red}\itshape}
+
+\newpage
+\question[20] 斐波那契数列由公式\ref{eq:fibonacci}给出。
+\begin{equation}
+    \label{eq:fibonacci}
+    f(n)=\left\{
+        \begin{array}{l@{\quad:\quad}l}
+            0  & n=0 \\
+            1  & n=1 \\
+            f(n-1) + f(n-2) & n>1
+        \end{array}
+    \right.
+\end{equation}
+请用尾递归(Tail Recursion)编写斐波那契数列计算程序，并用Benchmark模块对比普通递归和辗相加法的性能差异。
+\fillwithdottedlines{\stretch{2}}
+\ifprintanswers
+\newpage
+非递归Java程序实现如下：
+\importJava{code/fibonacci.java}
+验证的单元测试程序(JUnit 4)如下：
+\importJava{code/fibonacci-test.java}
+\fi
+
+\newpage
+\question[20] 
+请用本次培训了解的知识和工具，设计一个适合你所负责产品的质量改进措施。
+\fillwithdottedlines{\stretch{2}}
+
+\end{questions}
+
+\end{document}
+
+% vim: set ai nu nobk expandtab sw=4 tw=72 ts=4 syntax=tex :
