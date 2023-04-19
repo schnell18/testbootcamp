@@ -1,9 +1,16 @@
 # Introduction
 
-This is a collection mini golang projects to practise *go* programming.
+Unit test with fibonacci sequence. This project explores the golang standard
+testing framework as well as [Ginkgo][1], which is a BDD test framework.
 
-## Catelog
+## Run coverage
 
-| sub-directory      | comment                                             |
-| ------------------ | ----------------------------------------------------|
-| fib                | calculate fibonacci series                          |
+    go test –coverprofile=coverage.out
+    go tool cover -html coverage.out
+
+## Run benchmark
+
+    go test -bench=BenchmarkFibonacci
+
+
+[1]: https://onsi.github.io/ginkgo/
