@@ -2,7 +2,6 @@ package fib
 
 import (
 	"fmt"
-	"reflect"
 	"testing"
 )
 
@@ -23,6 +22,7 @@ func TestFibonacci(t *testing.T) {
 	}
 }
 
+// Test recursive implementation as sub tests
 func TestFibonacciSub(t *testing.T) {
 	cases := []struct {
 		arg  uint64
@@ -35,34 +35,8 @@ func TestFibonacciSub(t *testing.T) {
 	}
 	for _, tc := range cases {
 		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(t *testing.T) {
-			if got := Fibonacci(tc.arg); tc.want != got {
+			if got := Fibonacci2(tc.arg); tc.want != got {
 				t.Errorf("Expected '%d', but got '%d'", tc.want, got)
-			}
-		})
-	}
-}
-
-func TestFibonacci2(t *testing.T) {
-	type args struct {
-		n uint64
-	}
-	tests := []struct {
-		name string
-		args func(t *testing.T) args
-
-		want1 uint64
-	}{
-		//TODO: Add test cases
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			tArgs := tt.args(t)
-
-			got1 := Fibonacci2(tArgs.n)
-
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("Fibonacci2 got1 = %v, want1: %v", got1, tt.want1)
 			}
 		})
 	}
