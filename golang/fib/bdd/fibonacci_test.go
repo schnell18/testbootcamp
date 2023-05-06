@@ -1,4 +1,4 @@
-package fib
+package bdd_test
 
 import (
 	"fmt"
@@ -18,28 +18,28 @@ var _ = Describe("Fibonacci sequence", func() {
 
 	Context("Initial Fibonacci numbers", func() {
 		It("0th Fibonacci number", func() {
-			Expect(fib.Fibonacci(0)).Should(BeZero())
+			Expect(fib.FibonacciIterative(0)).Should(BeZero())
 		})
 		It("1th Fibonacci number", func() {
-			Expect(fib.Fibonacci(1)).Should(BeEquivalentTo(1))
+			Expect(fib.FibonacciIterative(1)).Should(BeEquivalentTo(1))
 		})
 		It("2th Fibonacci number", func() {
-			Expect(fib.Fibonacci(2)).Should(BeEquivalentTo(1))
+			Expect(fib.FibonacciIterative(2)).Should(BeEquivalentTo(1))
 		})
 		It("3th Fibonacci number", func() {
-			Expect(fib.Fibonacci(3)).Should(BeEquivalentTo(2))
+			Expect(fib.FibonacciIterative(3)).Should(BeEquivalentTo(2))
 		})
 	})
 
 	Context("Two-digit positions", func() {
 		It("12th Fibonacci number", func() {
-			Expect(fib.Fibonacci(12)).Should(Equal(uint64(144)))
+			Expect(fib.FibonacciIterative(12)).Should(Equal(uint64(144)))
 		})
 		It("13th Fibonacci number", func() {
-			Expect(fib.Fibonacci(13)).Should(Equal(uint64(233)))
+			Expect(fib.FibonacciIterative(13)).Should(Equal(uint64(233)))
 		})
 		It("15th Fibonacci number", func() {
-			Expect(fib.Fibonacci(15)).Should(Equal(uint64(610)))
+			Expect(fib.FibonacciIterative(15)).Should(Equal(uint64(610)))
 		})
 	})
 
@@ -56,7 +56,7 @@ var _ = Describe("Fibonacci sequence", func() {
 		}
 		for _, tc := range cases {
 			It(fmt.Sprintf("%dth Fibonacci number", tc.arg), func() {
-				Expect(fib.Fibonacci(tc.arg)).Should(Equal(tc.want))
+				Expect(fib.FibonacciIterative(tc.arg)).Should(Equal(tc.want))
 			})
 		}
 	})

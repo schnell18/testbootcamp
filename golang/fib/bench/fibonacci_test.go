@@ -1,40 +1,70 @@
-package fib
+package bench_test
 
 import (
-	"github.com/schnell18/testbootcamp/golang/fib"
 	"testing"
+
+	"github.com/schnell18/testbootcamp/golang/fib"
 )
 
-func BenchmarkFibonacci(b *testing.B) {
-	cases := []struct {
-		arg  uint64
-		want uint64
-	}{
-		{0, 0}, {1, 1}, {2, 1}, {3, 2},
-		{4, 3}, {5, 5}, {6, 8}, {7, 13},
-		{8, 21}, {9, 34}, {10, 55}, {11, 89},
-		{12, 144}, {13, 233}, {14, 377},
-	}
+var result uint64
+
+func BenchmarkFibonacciIterative(b *testing.B) {
+	seqs := []uint64{12, 14, 30}
+	var r uint64
 	for j := 0; j < b.N; j++ {
-		for _, tc := range cases {
-			_ = fib.Fibonacci(tc.arg)
+		for _, seq := range seqs {
+			r = fib.FibonacciIterative(seq)
 		}
 	}
+	result = r
 }
 
-func BenchmarkFibonacci2(b *testing.B) {
-	cases := []struct {
-		arg  uint64
-		want uint64
-	}{
-		{0, 0}, {1, 1}, {2, 1}, {3, 2},
-		{4, 3}, {5, 5}, {6, 8}, {7, 13},
-		{8, 21}, {9, 34}, {10, 55}, {11, 89},
-		{12, 144}, {13, 233}, {14, 377},
-	}
+func BenchmarkFibonacciDynamicProgramming(b *testing.B) {
+	seqs := []uint64{12, 14, 30}
+	var r uint64
 	for j := 0; j < b.N; j++ {
-		for _, tc := range cases {
-			_ = fib.Fibonacci2(tc.arg)
+		for _, seq := range seqs {
+			r = fib.FibonacciDynamicProgramming(seq)
 		}
 	}
+	result = r
 }
+
+func BenchmarkFibonacciDynamicProgramming2(b *testing.B) {
+	seqs := []uint64{12, 14, 30}
+	var r uint64
+	for j := 0; j < b.N; j++ {
+		for _, seq := range seqs {
+			r = fib.FibonacciDynamicProgramming2(seq)
+		}
+	}
+	result = r
+}
+
+func BenchmarkFibonacciTailRecursive(b *testing.B) {
+	seqs := []uint64{12, 14, 30}
+	var r uint64
+	for j := 0; j < b.N; j++ {
+		for _, seq := range seqs {
+			r = fib.FibonacciTailRecursive(seq)
+		}
+	}
+	result = r
+}
+
+func BenchmarkFibonacciRecursive(b *testing.B) {
+	seqs := []uint64{12, 14, 30}
+	var r uint64
+	for j := 0; j < b.N; j++ {
+		for _, seq := range seqs {
+			r = fib.FibonacciRecursive(seq)
+		}
+	}
+	result = r
+}
+
+// func BenchmarkFibonacciRecursiveForever(b *testing.B) {
+// 	for j := 0; j < b.N; j++ {
+//         _ = fib.FibonacciRecursive(uint64(j))
+// 	}
+// }
