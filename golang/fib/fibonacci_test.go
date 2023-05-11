@@ -3,9 +3,12 @@ package fib
 import (
 	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFibonacciIterative(t *testing.T) {
+	assert := assert.New(t)
 	cases := []struct {
 		arg  uint64
 		want uint64
@@ -15,11 +18,8 @@ func TestFibonacciIterative(t *testing.T) {
 		{8, 21}, {9, 34}, {10, 55}, {11, 89},
 		{12, 144}, {13, 233}, {14, 377},
 	}
-	for i, tc := range cases {
-
-		if got := FibonacciIterative(tc.arg); tc.want != got {
-			t.Errorf("TC#%d fibonacci(%d) == %d != %d", i+1, tc.arg, got, tc.want)
-		}
+	for _, tc := range cases {
+		assert.Equal(tc.want, FibonacciIterative(tc.arg))
 	}
 }
 

@@ -9,7 +9,7 @@ import (
 var result uint64
 
 func BenchmarkFibonacciIterative(b *testing.B) {
-	seqs := []uint64{12, 14, 30}
+	seqs := []uint64{12, 14, 100}
 	var r uint64
 	for j := 0; j < b.N; j++ {
 		for _, seq := range seqs {
