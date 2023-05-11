@@ -19,7 +19,9 @@ func TestFibonacciIterative(t *testing.T) {
 		{12, 144}, {13, 233}, {14, 377},
 	}
 	for _, tc := range cases {
-		assert.Equal(tc.want, FibonacciIterative(tc.arg))
+		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(_ *testing.T) {
+			assert.Equal(tc.want, FibonacciIterative(tc.arg))
+		})
 	}
 }
 
