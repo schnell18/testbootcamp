@@ -1,6 +1,7 @@
 package bench_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/schnell18/testbootcamp/golang/fib"
@@ -9,23 +10,40 @@ import (
 var result uint64
 
 func BenchmarkFibonacciIterative(b *testing.B) {
-	seqs := []uint64{12, 14, 100}
+	seqs := []uint64{30, 50, 100}
 	var r uint64
-	for j := 0; j < b.N; j++ {
-		for _, seq := range seqs {
-			r = fib.FibonacciIterative(seq)
-		}
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciIterative(seq)
+			}
+		})
 	}
 	result = r
 }
 
 func BenchmarkFibonacciDynamicProgramming(b *testing.B) {
-	seqs := []uint64{12, 14, 30}
+	seqs := []uint64{30, 50, 100}
 	var r uint64
-	for j := 0; j < b.N; j++ {
-		for _, seq := range seqs {
-			r = fib.FibonacciDynamicProgramming(seq)
-		}
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciDynamicProgramming(seq)
+			}
+		})
+	}
+	result = r
+}
+
+func BenchmarkFibonacciTailRecursive(b *testing.B) {
+	seqs := []uint64{30, 50, 100}
+	var r uint64
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciTailRecursive(seq)
+			}
+		})
 	}
 	result = r
 }
@@ -36,17 +54,6 @@ func BenchmarkFibonacciDynamicProgramming2(b *testing.B) {
 	for j := 0; j < b.N; j++ {
 		for _, seq := range seqs {
 			r = fib.FibonacciDynamicProgramming2(seq)
-		}
-	}
-	result = r
-}
-
-func BenchmarkFibonacciTailRecursive(b *testing.B) {
-	seqs := []uint64{12, 14, 30}
-	var r uint64
-	for j := 0; j < b.N; j++ {
-		for _, seq := range seqs {
-			r = fib.FibonacciTailRecursive(seq)
 		}
 	}
 	result = r
@@ -64,7 +71,7 @@ func BenchmarkFibonacciRecursive(b *testing.B) {
 }
 
 // func BenchmarkFibonacciRecursiveForever(b *testing.B) {
-// 	for j := 0; j < b.N; j++ {
+//     for j := 0; j < b.N; j++ {
 //         _ = fib.FibonacciRecursive(uint64(j))
-// 	}
+//     }
 // }
