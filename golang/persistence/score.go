@@ -1,3 +1,4 @@
+//go:generate mockgen -source $GOFILE -package $GOPACKAGE -destination ${GOFILE}_mock.go ScoreDAO
 package persistence
 
 type ScoreDAO interface {
