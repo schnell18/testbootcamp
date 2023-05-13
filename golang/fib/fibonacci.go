@@ -2,7 +2,7 @@ package fib
 
 func FibonacciIterative(n uint64) uint64 {
 	var i, x, y uint64 = 0, 0, 1
-	for i = 0; i < n; i++ {
+	for ; i < n; i++ {
 		x, y = y, x+y
 	}
 	return x
@@ -41,7 +41,7 @@ func FibonacciDynamicProgramming(n uint64) uint64 {
 }
 
 func FibonacciRecursive(n uint64) uint64 {
-	if n <= 2 {
+	if n < 2 {
 		return n
 	}
 	return FibonacciRecursive(n-1) + FibonacciRecursive(n-2)

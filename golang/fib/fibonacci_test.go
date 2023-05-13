@@ -43,6 +43,7 @@ func TestFibonacciIterative(t *testing.T) {
 
 // Test recursive implementation as sub tests
 func TestFibonacciRecursive(t *testing.T) {
+	assert := assert.New(t)
 	cases := []struct {
 		arg  uint64
 		want uint64
@@ -64,16 +65,15 @@ func TestFibonacciRecursive(t *testing.T) {
 		{14, 377},
 	}
 	for _, tc := range cases {
-		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(t *testing.T) {
-			if got := FibonacciRecursive(tc.arg); tc.want != got {
-				t.Errorf("Expected '%d', but got '%d'", tc.want, got)
-			}
+		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(_ *testing.T) {
+			assert.Equal(tc.want, FibonacciRecursive(tc.arg))
 		})
 	}
 }
 
 // Test dynamic programming implementation as sub tests
 func TestFibonacciDynamicProgramming(t *testing.T) {
+	assert := assert.New(t)
 	cases := []struct {
 		arg  uint64
 		want uint64
@@ -95,10 +95,8 @@ func TestFibonacciDynamicProgramming(t *testing.T) {
 		{14, 377},
 	}
 	for _, tc := range cases {
-		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(t *testing.T) {
-			if got := FibonacciDynamicProgramming(tc.arg); tc.want != got {
-				t.Errorf("Expected '%d', but got '%d'", tc.want, got)
-			}
+		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(_ *testing.T) {
+			assert.Equal(tc.want, FibonacciDynamicProgramming(tc.arg))
 		})
 	}
 }

@@ -3,9 +3,12 @@ package reverse
 import (
 	"testing"
 	"unicode/utf8"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestReverse(t *testing.T) {
+	assert := assert.New(t)
 	tests := []struct {
 		name string
 		arg  string
@@ -17,9 +20,9 @@ func TestReverse(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Reverse(tt.arg); got != tt.want {
-				t.Errorf("Reverse() = %v, want %v", got, tt.want)
-			}
+			got, err := Reverse(tt.arg)
+			assert.Nil(err)
+			assert.Equal(tt.want, got)
 		})
 	}
 }
@@ -31,13 +34,15 @@ func FuzzReverse(f *testing.F) {
 		f.Add(tc)
 	}
 	f.Fuzz(func(t *testing.T, orig string) {
-		rev := Reverse(orig)
-		doubleRev := Reverse(rev)
-		if orig != doubleRev {
-			t.Errorf("Before: %q, after: %q", orig, doubleRev)
+		assert := assert.New(t)
+		rev, err1 := Reverse(orig)
+		doubleRev, err2 := Reverse(rev)
+		if err1 != nil || err2 != nil {
+			t.Skip("Ignore invalid utf8 string")
 		}
-		if utf8.ValidString(orig) && !utf8.ValidString(rev) {
-			t.Errorf("Reverse produced invalid UTF-8 string %q", rev)
-		}
+
+		assert.Equal(orig, doubleRev)
+		assert.True(utf8.ValidString(orig))
+		assert.True(utf8.ValidString(rev))
 	})
 }

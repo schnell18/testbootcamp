@@ -25,6 +25,7 @@ func fibDPLoop() {
 	for n := 0; n < 100; n++ {
 		seqs := []uint64{12, 14, 30}
 		for _, seq := range seqs {
+			//nolint:staticcheck
 			fib.FibonacciRecursive(seq)
 		}
 	}

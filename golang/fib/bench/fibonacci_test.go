@@ -9,19 +9,6 @@ import (
 
 var result uint64
 
-func BenchmarkFibonacciIterative(b *testing.B) {
-	seqs := []uint64{30, 50, 100}
-	var r uint64
-	for _, seq := range seqs {
-		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
-				r = fib.FibonacciIterative(seq)
-			}
-		})
-	}
-	result = r
-}
-
 func BenchmarkFibonacciDynamicProgramming(b *testing.B) {
 	seqs := []uint64{30, 50, 100}
 	var r uint64
@@ -62,8 +49,28 @@ func BenchmarkFibonacciRecursive(b *testing.B) {
 	result = r
 }
 
-// func BenchmarkFibonacciRecursiveForever(b *testing.B) {
-//     for j := 0; j < b.N; j++ {
-//         _ = fib.FibonacciRecursive(uint64(j))
-//     }
-// }
+func BenchmarkFibonacciIterative(b *testing.B) {
+	seqs := []uint64{30, 50, 100}
+	var r uint64
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciIterative(seq)
+			}
+		})
+	}
+	result = r
+}
+
+func BenchmarkFibonacciTailRecursive(b *testing.B) {
+	seqs := []uint64{30, 50, 100}
+	var r uint64
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciTailRecursive(seq)
+			}
+		})
+	}
+	result = r
+}
