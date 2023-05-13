@@ -35,19 +35,6 @@ func BenchmarkFibonacciDynamicProgramming(b *testing.B) {
 	result = r
 }
 
-func BenchmarkFibonacciTailRecursive(b *testing.B) {
-	seqs := []uint64{30, 50, 100}
-	var r uint64
-	for _, seq := range seqs {
-		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
-				r = fib.FibonacciTailRecursive(seq)
-			}
-		})
-	}
-	result = r
-}
-
 func BenchmarkFibonacciDynamicProgramming2(b *testing.B) {
 	seqs := []uint64{30, 50, 100}
 	var r uint64

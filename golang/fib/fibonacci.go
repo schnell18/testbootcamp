@@ -41,7 +41,7 @@ func FibonacciDynamicProgramming(n uint64) uint64 {
 }
 
 func FibonacciRecursive(n uint64) uint64 {
-	if n < 2 {
+	if n <= 2 {
 		return n
 	}
 	return FibonacciRecursive(n-1) + FibonacciRecursive(n-2)

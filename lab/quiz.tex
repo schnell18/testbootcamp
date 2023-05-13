@@ -150,7 +150,7 @@
 \end{equation}
 在本练习中，你将尝试使用单元测试、基准测试和静态代码分析技术提升代码质量，
 并通过代码测试覆盖率衡量代码被测试的程度。
-我们将利用\emph{testbootcamp}项目进行上述练习，
+我们将利用\emph{testbootcamp}项目进行上述练习。
 该项目实现了计算斐波那契数列的多种算法以及部分单元测试，具体算法如下：
 \begin{itemize}
     \item 辗转相加法(\emph{FibonacciIterative})
@@ -159,8 +159,7 @@
     \item 尾递归(\emph{FibonacciTailRecursive})
 \end{itemize}
 
-其中辗转相加法有缺陷，请运行单元测试并找出该缺陷，
-修正该程序，并确保所有单元测试都能通过。
+其中普通递归实现有缺陷，请运行单元测试并找出该缺陷，修正该程序，并确保所有单元测试都能通过。
 尾递归(Tail Recursion)编写斐波那契数列计算程序缺少单元测试，请补充该算法的单元测试。
 然后用Benchmark模块对比该算法和普通递归和辗相加法的性能差异。
 请按以下步骤进行练习：
@@ -213,7 +212,7 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}切换到testbootcamp项目的\verb=golang/fib=目录下
     \subpart{}执行\verb=go test -v .=
     \subpart{}观察输出
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
     \subpart{}是否观察到单元测试失败？为什么？
     \subpart{}修正缺陷并重新执行单元测试
   \end{subparts}
@@ -223,7 +222,7 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}切换到testbootcamp项目的\verb=golang/fib/bdd=目录下
     \subpart{}执行\verb=go test .=
     \subpart{}观察输出
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
   \end{subparts}
 
   \part{}运行所有单元测试
@@ -231,7 +230,7 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}切换到testbootcamp项目的\verb=golang=目录下
     \subpart{}执行\verb=go test -v ./...=
     \subpart{}观察输出
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
   \end{subparts}
 
   \part{}运行基准测试
@@ -239,9 +238,9 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}切换到testbootcamp项目的\verb=golang/fib/bench=目录下
     \subpart{}执行\verb#go test -bench=.#
     \subpart{}观察输出
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
     \subpart{}哪个实现的性能比较好？为什么?
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
   \end{subparts}
 
   \part{}测试覆盖率
@@ -249,15 +248,15 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}切换到testbootcamp项目的\verb=golang/fib=目录下
     \subpart{}执行\verb#go test –coverprofile=coverage.out#
     \subpart{}执行\verb#go tool cover -html coverage.out#
-    \subpart{}观察在浏览器中的代码覆盖情况
-    \fillwithdottedlines{\stretch{2}}
+    \subpart{}观察在浏览器中的代码覆盖情况，并做简要记录
+    \fillwithdottedlines{1in}
   \end{subparts}
 
   \part{}使用golangci-lint扫描代码
   \begin{subparts}
     \subpart{}切换到testbootcamp项目的\verb=golang=目录下
     \subpart{}执行\verb#golangci-lint run#
-    \subpart{}观察执行结果 \fillwithdottedlines{\stretch{2}}
+    \subpart{}观察执行结果 \fillwithdottedlines{1in}
     \subpart{}请更正该问题后再次扫描
   \end{subparts}
 
@@ -267,9 +266,21 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \subpart{}补充尾递归算法的单元测试及基准测试
     \subpart{}重复之前的步骤运行单元测试和基准测试
     \subpart{}观察输出
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
     \subpart{}尾递归算法的性能是否有提升？为什么?
-    \fillwithdottedlines{\stretch{2}}
+    \fillwithdottedlines{1in}
+  \end{subparts}
+
+  \part{}基准测试可以帮忙我们了解程序耗时的分布情况。本部分收集动态规划算法的CPU profile
+  \begin{subparts}
+    \subpart{}运行命令: \\
+      \verb|go test -run=NONE \| \\
+      \verb|        -bench='BenchmarkFibonacciDynamicProgramming$' \| \\
+      \verb|        -cpuprofile=dp.out| \\
+      \verb|        -count=5|
+    \subpart{}然后运行\verb|go tool pprof -pdf dp.out|
+    \subpart{}打开上一步生成的PDF文件，并观察记录：
+    \fillwithdottedlines{1in}
   \end{subparts}
 
 \end{parts}
@@ -385,7 +396,7 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
 \newpage
 \question[20] 
 请用本次培训了解的知识和工具，设计一个适合你所负责产品的质量改进措施。
-\fillwithdottedlines{\stretch{2}}
+\fillwithdottedlines{\stretch{1}}
 
 \end{questions}
 
