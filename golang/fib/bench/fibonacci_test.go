@@ -49,23 +49,28 @@ func BenchmarkFibonacciTailRecursive(b *testing.B) {
 }
 
 func BenchmarkFibonacciDynamicProgramming2(b *testing.B) {
-	seqs := []uint64{12, 14, 30}
+	seqs := []uint64{30, 50, 100}
 	var r uint64
-	for j := 0; j < b.N; j++ {
-		for _, seq := range seqs {
-			r = fib.FibonacciDynamicProgramming2(seq)
-		}
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciDynamicProgramming2(seq)
+			}
+		})
 	}
 	result = r
 }
 
 func BenchmarkFibonacciRecursive(b *testing.B) {
+	// NOTE: use smaller nubmer as recursive algorithm is very slow for big number
 	seqs := []uint64{12, 14, 30}
 	var r uint64
-	for j := 0; j < b.N; j++ {
-		for _, seq := range seqs {
-			r = fib.FibonacciRecursive(seq)
-		}
+	for _, seq := range seqs {
+		b.Run(fmt.Sprintf("fib(%d)", seq), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				r = fib.FibonacciRecursive(seq)
+			}
+		})
 	}
 	result = r
 }
