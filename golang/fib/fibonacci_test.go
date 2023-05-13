@@ -70,8 +70,8 @@ func TestFibonacciDynamicProgramming(t *testing.T) {
 	}
 }
 
-// Test dynamic programming implementation as sub tests
-func TestFibonacciTailRecursive(t *testing.T) {
+// Test dynamic programming implementation 2 as sub tests
+func TestFibonacciDynamicProgramming2(t *testing.T) {
 	cases := []struct {
 		arg  uint64
 		want uint64
@@ -83,7 +83,7 @@ func TestFibonacciTailRecursive(t *testing.T) {
 	}
 	for _, tc := range cases {
 		t.Run(fmt.Sprintf("Fibonacci(%d)=%d", tc.arg, tc.want), func(t *testing.T) {
-			if got := FibonacciTailRecursive(tc.arg); tc.want != got {
+			if got := FibonacciDynamicProgramming2(tc.arg); tc.want != got {
 				t.Errorf("Expected '%d', but got '%d'", tc.want, got)
 			}
 		})
