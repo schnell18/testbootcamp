@@ -151,12 +151,18 @@
 在本练习中，你将尝试使用单元测试、基准测试和静态代码分析技术提升代码质量，
 并通过代码测试覆盖率衡量代码被测试的程度。
 我们将利用\emph{testbootcamp}项目进行上述练习，
-该项目实现了计算斐波那契数列的多种算法以及部分单元测试。
-其中辗转相加法(\emph{Fibonacci})有缺陷，请运行单元测试并找出该缺陷，
+该项目实现了计算斐波那契数列的多种算法以及部分单元测试，具体算法如下：
+\begin{itemize}
+    \item 辗转相加法(\emph{FibonacciIterative})
+    \item 动态规划(\emph{FibonacciDynamicProgramming})
+    \item 普通递归(\emph{FibonacciRecursive})
+    \item 尾递归(\emph{FibonacciTailRecursive})
+\end{itemize}
+
+其中辗转相加法有缺陷，请运行单元测试并找出该缺陷，
 修正该程序，并确保所有单元测试都能通过。
-尾递归(Tail Recursion)编写斐波那契数列计算程序在名为\emph{Fibonacci3}的函数中。
-该函数缺少单元测试，请补充该算法的单元测试，可使用testing模块或ginkgo实现。
-然后用Benchmark模块对比该算法和普通递归(\emph{Fibonacci2})和辗相加法(\emph{Fibonacci})的性能差异。
+尾递归(Tail Recursion)编写斐波那契数列计算程序缺少单元测试，请补充该算法的单元测试。
+然后用Benchmark模块对比该算法和普通递归和辗相加法的性能差异。
 请按以下步骤进行练习：
 % \begin{golangcode}
 % func Fibonacci3(n uint64) uint64 {
