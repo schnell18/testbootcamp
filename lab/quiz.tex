@@ -283,6 +283,21 @@ MacOS用户运行\verb=brew install golangci-lint=命令安装golangci-lint。
     \fillwithdottedlines{1in}
   \end{subparts}
 
+  \part{}模糊测试可以帮忙我们进行高强度的测试覆盖。\emph{testbootcamp}项目中的\emph{Reverse}
+  函数的单元测试虽然可以通过，但该函数未能正确处理多字节字符串，请运行模糊测试并找出bug。
+  \begin{subparts}
+    \subpart{}运行命令: \\
+      \verb|cd golang/reverse  \| \\
+      \verb|go test -fuzz=Fuzz| \\
+    \subpart{}观察输出是否有\emph{Failing input written to
+      testdata/fuzz/FuzzReverse}字样?
+    \fillwithdottedlines{1cm}
+    \subpart{}观察当前目录下是否生成了testdata目录，运行命令: \verb|find testdata| 加以验证，简述一下你的发现：
+    \fillwithdottedlines{1in}
+    \subpart{}运行命令: \verb|go test| 观察输出，简述一下你的发现：
+    \fillwithdottedlines{1in}
+  \end{subparts}
+
 \end{parts}
 
 \newpage

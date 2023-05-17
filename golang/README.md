@@ -7,6 +7,11 @@ testing framework as well as [Ginkgo][1], which is a BDD test framework.
 
     go test ./...
 
+## Run fuzz test
+
+    cd fib
+    go test -fuzz=Fuzz
+
 ## Run benchmark
 
     go test -bench=.
